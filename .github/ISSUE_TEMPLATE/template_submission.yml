@@ -1,0 +1,71 @@
+name: 提交高校论文模板线索
+description: 推荐一个公开的高校毕业论文、学位论文或课程论文模板
+title: "[模板提交] 学校名称 - 模板类型"
+labels:
+  - template-submission
+body:
+  - type: input
+    id: university
+    attributes:
+      label: 学校名称
+      description: 请写中文校名，必要时补充英文名或缩写。
+      placeholder: 例如：华东师范大学 / ECNU
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: 适用层次
+      options:
+        - 本科
+        - 硕士
+        - 博士
+        - 本科/硕士/博士
+        - 课程论文
+        - 开题/答辩
+        - 不确定
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: 模板格式
+      options:
+        - LaTeX
+        - Word
+        - PDF
+        - Typst
+        - Beamer
+        - 多格式
+        - 不确定
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 公开来源链接
+      description: 学校官网、学院页面、GitHub 仓库、Overleaf 或 CTAN 页面均可。
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: official
+    attributes:
+      label: 是否官方来源
+      options:
+        - 学校/学院官方发布
+        - 同学或社区维护
+        - 不确定
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: 更新时间或适用年份
+      placeholder: 例如：2026、2025、未知
+  - type: textarea
+    id: notes
+    attributes:
+      label: 备注
+      description: 可填写编译方式、使用说明、已知问题、许可证、是否需要人工核验等。
+

@@ -307,6 +307,8 @@ function inferUniversity(repo) {
     [/sysu|中山大学|sun yat-sen/i, "中山大学", "SYSU|Sun Yat-sen University"],
     [/tongji|同济大学/i, "同济大学", "Tongji University"],
     [/ynu|云南大学|yunnan university/i, "云南大学", "YNU|Yunnan University"],
+    [/ecnu|华东师范大学|east china normal/i, "华东师范大学", "ECNU|East China Normal University"],
+    [/cau|中国农业大学|china agricultural/i, "中国农业大学", "CAU|China Agricultural University"],
   ];
   for (const [pattern, university, aliases] of patterns) {
     if (pattern.test(text)) return { university, aliases };

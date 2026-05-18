@@ -95,7 +95,9 @@ function Infer-University($Repo) {
         @{ Pattern = "scu[-_]?thesis|四川大学|sichuan university"; University = "四川大学"; Aliases = "SCU|Sichuan University" },
         @{ Pattern = "sysu|中山大学|sun yat-sen"; University = "中山大学"; Aliases = "SYSU|Sun Yat-sen University" },
         @{ Pattern = "tongji|同济大学"; University = "同济大学"; Aliases = "Tongji University" },
-        @{ Pattern = "ynu|云南大学|yunnan university"; University = "云南大学"; Aliases = "YNU|Yunnan University" }
+        @{ Pattern = "ynu|云南大学|yunnan university"; University = "云南大学"; Aliases = "YNU|Yunnan University" },
+        @{ Pattern = "ecnu|华东师范大学|east china normal"; University = "华东师范大学"; Aliases = "ECNU|East China Normal University" },
+        @{ Pattern = "cau|中国农业大学|china agricultural"; University = "中国农业大学"; Aliases = "CAU|China Agricultural University" }
     )
     foreach ($rule in $rules) {
         if ($text -match $rule.Pattern) { return $rule }
