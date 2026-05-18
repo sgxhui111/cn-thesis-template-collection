@@ -17,3 +17,16 @@ jobs:
         shell: pwsh
         run: ./scripts/Validate-Catalog.ps1 -CheckHashes
 
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem scripts -Filter *.ps1
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($file.FullName, [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | Format-List
+              throw "PowerShell parse failed: $($file.Name)"
+            }
+          }

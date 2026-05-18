@@ -6,7 +6,7 @@
 [![Validate catalog](https://github.com/sgxhui111/cn-thesis-template-collection/actions/workflows/validate-catalog.yml/badge.svg)](https://github.com/sgxhui111/cn-thesis-template-collection/actions/workflows/validate-catalog.yml)
 [![GitHub stars](https://img.shields.io/github/stars/sgxhui111/cn-thesis-template-collection?style=social)](https://github.com/sgxhui111/cn-thesis-template-collection)
 
-中国高校毕业论文、学位论文、课程论文格式模板合集。这个项目希望把散落在 GitHub、学校官网、学院通知和同学个人仓库里的模板统一收集、索引、去重，方便后来者少踩一点格式坑。
+中国高校毕业论文、学位论文、课程论文格式模板合集，并逐步扩展为学生论文写作支持工具箱。这个项目希望把散落在 GitHub、学校官网、学院通知和同学个人仓库里的模板统一收集、索引、去重，也提供合规的中文学术写作改进和文献检索辅助，方便后来者少踩一点格式坑。
 
 如果你手里有自己学校的本科毕业论文、硕士/博士学位论文、课程论文、开题报告、答辩 Beamer、Word 模板或 LaTeX 模板，欢迎提交 Issue 或 Pull Request，一起把这个数据库补全。
 
@@ -68,6 +68,57 @@ powershell -ExecutionPolicy Bypass -File scripts\Query-Catalog.ps1 -Level gradua
 ```
 
 下载文件统一保存在 `assets/formats/`，索引统一保存在 `assets/catalog.csv`。
+
+## 中文论文写作辅助
+
+本仓库新增了中文学术文本审阅脚本，用来发现重复句、高频短语、长句、模板化表达和疑似缺引用句，帮助同学做合规的原创性提升。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Review-ChineseAcademicText.ps1 -InputPath draft.md
+```
+
+输出文件默认是 `academic_text_review.md`，包括：
+
+- 重复句和高频短语
+- 疑似缺引用句
+- 长句拆分提醒
+- 模板化表达提醒
+- 合规改写提示词
+
+重要边界：本项目不提供“规避 AI 检测”“绕过查重”“洗稿”服务。脚本和说明只用于补充引用、强化论证、减少无意重复、改善表达和学术规范。
+
+## 多数据库文献检索
+
+本仓库支持生成 Web of Science、Scopus、Google Scholar、中国知网和开放元数据源的检索计划。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Build-LiteratureSearch.ps1 `
+  -Query "城市韧性 暴雨 内涝 风险评估" `
+  -EnglishQuery "urban resilience pluvial flooding waterlogging risk assessment" `
+  -StartYear 2020 `
+  -EndYear 2026 `
+  -TopicName urban-flood-resilience
+```
+
+生成内容：
+
+- `search_plan.md`：每个数据库的检索式、入口、导出建议和检索记录表
+- `search_queries.csv`：可机器读取的检索式表
+- `exports/`：放置用户从数据库导出的 RIS、BibTeX、CSV 文件
+
+将数据库导出文件放进 `exports/` 后，可以归一化合并：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Normalize-LiteratureExport.ps1 `
+  -InputDir literature-search\urban-flood-resilience\exports
+```
+
+注意：
+
+- Web of Science 需要机构访问或 Clarivate API 权限。
+- Scopus 需要机构访问或 Elsevier API key。
+- Google Scholar 支持单条引用导出和个人 library 工作流，但不提供通用批量搜索 API，请不要抓取或绕过限制。
+- CNKI 通过用户授权账号和官方界面导出题录，不绕过登录、验证码、付费墙或机构权限。
 
 ## 如何贡献
 
@@ -176,6 +227,8 @@ Google 采集使用官方 Programmable Search JSON API。请不要抓取 Google 
 - 本仓库是公开模板和格式要求的索引与备份合集，不代表任何学校官方立场。
 - 毕业论文格式会随年份和学院要求变化，提交前请以学校或学院最新通知为准。
 - 各模板版权和许可证归原作者或原发布单位所有。本仓库保留来源链接、许可证和哈希，只做整理与可追踪归档。
+- 写作辅助功能不保证也不承诺降低任何检测系统分数，只帮助用户做合规原创性提升、引用补全和语言质量改进。
+- 文献检索功能只处理公开入口、授权访问和用户导出的元数据，不下载受限全文，不绕过数据库访问控制。
 - 如果你是模板作者或学校相关负责人，希望修改来源说明、删除文件或更新版本，欢迎提交 Issue。
 
 ## 参考与致谢

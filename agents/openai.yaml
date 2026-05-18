@@ -1,8 +1,7 @@
 interface:
   display_name: "CN Thesis Template Collection"
-  short_description: "Collect and search Chinese university thesis format templates."
-  default_prompt: "Use $cn-thesis-template-collection to find, download, or apply a Chinese university thesis formatting template from the local catalog."
+  short_description: "Chinese thesis templates, writing checks, and literature search."
+  default_prompt: "Use $cn-thesis-template-collection to find thesis templates, review Chinese academic writing, or build a lawful literature-search plan."
 
 policy:
   allow_implicit_invocation: true
-

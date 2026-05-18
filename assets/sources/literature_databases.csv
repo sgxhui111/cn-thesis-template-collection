@@ -1,0 +1,7 @@
+database,scope,access_mode,automation_mode,recommended_export,notes
+Web of Science,International citation index,Institutional access or Clarivate API entitlement,Search-plan plus user export; API only with credentials,RIS|BibTeX|CSV,Do not bypass subscription or login.
+Scopus,International abstracts and citation index,Institutional access or Elsevier API key,Search-plan plus user export; API only with credentials,RIS|BibTeX|CSV,Some API metadata depends on entitlement.
+Google Scholar,Broad scholarly discovery,Manual web access,Search URL and manual BibTeX/citation-manager export,BibTeX,No general public search API; avoid scraping and CAPTCHA bypass.
+CNKI,Chinese journals theses conferences standards,Institutional or personal access,Search-plan plus user export; API only with authorization,RefWorks/RIS-like text|EndNote|GB/T 7714|BibTeX,Use exported records; do not bypass login or paywall.
+OpenAlex/Crossref/arXiv/PubMed,Open metadata and public repositories,Public APIs where available,API or manual export,JSON|BibTeX|CSV,Good fallback for open metadata.
+

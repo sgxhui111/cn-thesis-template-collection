@@ -89,3 +89,15 @@ $env:GOOGLE_CSE_ID="your-cse-id"
 powershell -ExecutionPolicy Bypass -File scripts\Collect-GoogleResults.ps1 -MaxPerQuery 20
 ```
 
+## 学术写作和文献功能贡献
+
+欢迎补充新的文献数据库导出格式、字段映射和检索式模板，但请遵守：
+
+- 不添加绕过登录、验证码、付费墙、机构权限或数据库使用条款的代码。
+- 不添加规避 AI 检测、规避查重或洗稿功能。
+- 新脚本应优先处理用户自己提供的文本、公开元数据或授权数据库导出文件。
+- 新增脚本后请运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Validate-Catalog.ps1 -CheckHashes
+```
