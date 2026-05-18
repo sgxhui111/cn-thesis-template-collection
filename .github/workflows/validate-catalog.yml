@@ -1,0 +1,19 @@
+name: Validate catalog
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate catalog
+        shell: pwsh
+        run: ./scripts/Validate-Catalog.ps1 -CheckHashes
+

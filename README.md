@@ -3,11 +3,14 @@
 [![templates](https://img.shields.io/badge/templates-25-blue)](assets/catalog.csv)
 [![universities](https://img.shields.io/badge/universities-20-green)](assets/catalog.csv)
 [![formats](https://img.shields.io/badge/formats-LaTeX%20%7C%20Word%20%7C%20PDF-lightgrey)](assets/catalog.csv)
+[![Validate catalog](https://github.com/sgxhui111/cn-thesis-template-collection/actions/workflows/validate-catalog.yml/badge.svg)](https://github.com/sgxhui111/cn-thesis-template-collection/actions/workflows/validate-catalog.yml)
 [![GitHub stars](https://img.shields.io/github/stars/sgxhui111/cn-thesis-template-collection?style=social)](https://github.com/sgxhui111/cn-thesis-template-collection)
 
 中国高校毕业论文、学位论文、课程论文格式模板合集。这个项目希望把散落在 GitHub、学校官网、学院通知和同学个人仓库里的模板统一收集、索引、去重，方便后来者少踩一点格式坑。
 
 如果你手里有自己学校的本科毕业论文、硕士/博士学位论文、课程论文、开题报告、答辩 Beamer、Word 模板或 LaTeX 模板，欢迎提交 Issue 或 Pull Request，一起把这个数据库补全。
+
+详细贡献说明见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 当前收录
 
@@ -138,6 +141,12 @@ powershell -ExecutionPolicy Bypass -File scripts\Collect-GitHubTemplates.ps1 -Se
 
 ## 维护脚本
 
+一键刷新种子源并校验 catalog：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Update-Collection.ps1 -SeedOnly -CheckHashes
+```
+
 GitHub 种子源采集：
 
 ```powershell
@@ -160,6 +169,8 @@ powershell -ExecutionPolicy Bypass -File scripts\Collect-GoogleResults.ps1 -MaxP
 
 Google 采集使用官方 Programmable Search JSON API。请不要抓取 Google 搜索结果页面。
 
+每次 Pull Request 和推送到 `main` 时，GitHub Actions 会自动运行 [Validate catalog](.github/workflows/validate-catalog.yml)，检查 `assets/catalog.csv` 字段、枚举值、本地文件路径和 SHA-256 哈希。
+
 ## 重要声明
 
 - 本仓库是公开模板和格式要求的索引与备份合集，不代表任何学校官方立场。
@@ -172,4 +183,3 @@ Google 采集使用官方 Programmable Search JSON API。请不要抓取 Google 
 这个项目的 README 和组织方式参考了 [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) 的索引、安装和贡献说明结构，也感谢各高校模板维护者长期留下的开源工作，尤其是 [mohuangrui/ucasthesis](https://github.com/mohuangrui/ucasthesis)、[mengchaoheng/SCUT_thesis](https://github.com/mengchaoheng/SCUT_thesis)、[obster-y/XJTU-thesis](https://github.com/obster-y/XJTU-thesis)、[Koyamin/ecnuthesis](https://github.com/Koyamin/ecnuthesis)、[Cdmium/CAUTemplate](https://github.com/Cdmium/CAUTemplate)、[alwintsui/scutthesis](https://github.com/alwintsui/scutthesis)、[OChicken/SCUT-Bachelor-Thesis-Template](https://github.com/OChicken/SCUT-Bachelor-Thesis-Template)。
 
 欢迎继续补充你的学校。
-
