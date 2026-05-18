@@ -1,7 +1,7 @@
 interface:
   display_name: "CN Thesis Template Collection"
-  short_description: "Chinese thesis templates, writing checks, and literature search."
-  default_prompt: "Use $cn-thesis-template-collection to find thesis templates, review Chinese academic writing, or build a lawful literature-search plan."
+  short_description: "Chinese thesis templates, originality review, and literature search."
+  default_prompt: "Use $cn-thesis-template-collection to find thesis templates, review Chinese academic originality and repetition risk, or build a lawful literature-search plan."
 
 policy:
   allow_implicit_invocation: true

@@ -30,3 +30,27 @@ jobs:
               throw "PowerShell parse failed: $($file.Name)"
             }
           }
+
+      - name: Smoke test writing workflow
+        shell: pwsh
+        run: |
+          $sample = Join-Path $env:RUNNER_TEMP "sample-draft.md"
+          @'
+          # 数字经济背景下高校学生学习行为研究
+
+          随着信息技术的快速发展，数字经济已经成为推动社会发展的重要力量。研究表明，数字平台能够显著提升学生的学习效率，并且对高校教学改革具有重要意义。随着信息技术的快速发展，数字经济已经成为推动社会发展的重要力量。
+
+          值得注意的是，现有研究主要集中在平台建设、教学资源和学生满意度等方面，但是对学习行为内部机制的讨论仍然不足。
+          '@ | Set-Content -Path $sample -Encoding UTF8
+
+          $reviewDir = Join-Path $env:RUNNER_TEMP "review"
+          ./scripts/Invoke-CnOriginalityWorkflow.ps1 -InputPath $sample -OutputDir $reviewDir
+          if (-not (Test-Path (Join-Path $reviewDir "01_originality_report.md"))) {
+            throw "Originality report was not generated."
+          }
+
+          $comparePath = Join-Path $env:RUNNER_TEMP "compare.csv"
+          ./scripts/Compare-CnDrafts.ps1 -OriginalPath $sample -RevisedPath $sample -OutputPath $comparePath
+          if (-not (Test-Path $comparePath)) {
+            throw "Draft comparison report was not generated."
+          }

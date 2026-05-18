@@ -69,23 +69,61 @@ powershell -ExecutionPolicy Bypass -File scripts\Query-Catalog.ps1 -Level gradua
 
 下载文件统一保存在 `assets/formats/`，索引统一保存在 `assets/catalog.csv`。
 
-## 中文论文写作辅助
+## 中文论文原创性与重复风险辅助
 
-本仓库新增了中文学术文本审阅脚本，用来发现重复句、高频短语、长句、模板化表达和疑似缺引用句，帮助同学做合规的原创性提升。
+本仓库新增了更完整的中文学术写作辅助模块，用来发现重复句、高频短语、长句、模板化表达、疑似缺引用句和段落优先级，帮助同学做合规的原创性提升。
+
+它的目标不是“绕过 AI 检测”或“洗稿”，而是把论文改成更清楚、更有来源、更像自己的研究：补引用、补证据、重组论证、减少无意重复，并留下可解释的修改记录。
+
+完整流程：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Invoke-CnOriginalityWorkflow.ps1 `
+  -InputPath draft.docx `
+  -OutputDir review
+```
+
+也可以只运行审查：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Review-CnAcademicText.ps1 `
+  -InputPath draft.md `
+  -OutputDir review
+```
+
+旧命令仍然兼容：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\Review-ChineseAcademicText.ps1 -InputPath draft.md
 ```
 
-输出文件默认是 `academic_text_review.md`，包括：
+完整流程会输出：
 
-- 重复句和高频短语
-- 疑似缺引用句
-- 长句拆分提醒
-- 模板化表达提醒
-- 合规改写提示词
+- `01_originality_report.md`：中文可读审阅报告
+- `02_sentence_issues.csv`：句子级问题清单
+- `03_repeated_phrases.csv`：高频重复短语
+- `04_paragraph_actions.csv`：段落修改优先级
+- `05_prompt_pack.md`：合规改写提示词
+- `06_revision_log_template.md`：修改记录模板
 
-重要边界：本项目不提供“规避 AI 检测”“绕过查重”“洗稿”服务。脚本和说明只用于补充引用、强化论证、减少无意重复、改善表达和学术规范。
+比较原稿和修改稿，支持 `.md`、`.txt` 和 `.docx`：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Compare-CnDrafts.ps1 `
+  -OriginalPath original.md `
+  -RevisedPath revised.md `
+  -OutputPath compare.csv
+```
+
+从 Word 文档提取纯文本：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\Extract-CnText.ps1 `
+  -InputPath thesis.docx `
+  -OutputPath thesis.txt
+```
+
+重要边界：本项目不提供“规避 AI 检测”“绕过查重”“洗稿”服务。脚本和说明只用于补充引用、强化论证、减少无意重复、改善表达和学术规范，不能保证也不会承诺任何检测系统分数。
 
 ## 多数据库文献检索
 
